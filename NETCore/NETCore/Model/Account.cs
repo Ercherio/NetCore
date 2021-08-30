@@ -1,0 +1,27 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using Newtonsoft.Json;
+using System.Threading.Tasks;
+
+namespace NETCore.Model
+{
+    [Table("tb_tr_accounts")]
+    public class Account
+    {
+        //[Key]
+        //[ForeignKey("NIK")]
+        [Key]
+        public string NIK { get; set; }
+        public string Password { get; set; }
+
+        [JsonIgnore]
+        public virtual Person Person { get; set; }
+
+        [JsonIgnore]
+        public virtual Profiling Profiling { get; set; }
+
+    }
+}
