@@ -23,6 +23,12 @@ namespace NETCore.Model
 
         [Newtonsoft.Json.JsonIgnore]
         public virtual Education Education { get; set; }
+
+        public Profiling(string nIK, int education_Id)
+        {
+            NIK = nIK;
+            Education_Id = education_Id;
+        }
     }
    
 }

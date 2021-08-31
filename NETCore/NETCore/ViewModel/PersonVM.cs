@@ -1,47 +1,36 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using System.ComponentModel.DataAnnotations; //tambahi ini untuk [Key] atau Constrain
-using System.ComponentModel.DataAnnotations.Schema;
-using Newtonsoft.Json.Converters;
 
-namespace NETCore.Model
+namespace NETCore.ViewModel
 {
-    [Table("tb_m_persons")]
-    public class Person
+    public class PersonVM
     {
-        [Key]   //anotasi Primary Key
         public string NIK { get; set; }
-
         public string FirstName { get; set; }
-
         public string LastName { get; set; }
-
+        public string FullName { get; set; }
         public string Phone { get; set; }
-
         public DateTime BirthDate { get; set; }
-
         public int Salary { get; set; }
-
-        [Required]
-        [EmailAddress]
         public string Email { get; set; }
-
         public enum Gender
         {
-            Mele,
-            Famale
+            Male,
+            Female
         }
 
         [JsonConverter(typeof(StringEnumConverter))]
         public Gender gender { get; set; }
+        public string Password { get; set; }
+        public string Degree { get; set; }
+        public string GPA { get; set; }
+
+        public int UniversityId { get; set; }
 
 
-
-        [JsonIgnore]
-        //public string AccountId { get; set; }
-        public virtual Account Account { get; set; }
     }
 }

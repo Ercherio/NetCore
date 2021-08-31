@@ -7514,11 +7514,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\rioga\\source\\repos\\NETCore\\NETCore\\NETCore.csproj",
+      "projectUniqueName": "C:\\Users\\rioga\\OneDrive\\Documents\\GitHub\\NetCore\\NETCore\\NETCore\\NETCore.csproj",
       "projectName": "NETCore",
-      "projectPath": "C:\\Users\\rioga\\source\\repos\\NETCore\\NETCore\\NETCore.csproj",
+      "projectPath": "C:\\Users\\rioga\\OneDrive\\Documents\\GitHub\\NetCore\\NETCore\\NETCore\\NETCore.csproj",
       "packagesPath": "C:\\Users\\rioga\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\rioga\\source\\repos\\NETCore\\NETCore\\obj\\",
+      "outputPath": "C:\\Users\\rioga\\OneDrive\\Documents\\GitHub\\NetCore\\NETCore\\NETCore\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\rioga\\AppData\\Roaming\\NuGet\\NuGet.Config",

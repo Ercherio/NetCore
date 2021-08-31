@@ -23,5 +23,10 @@ namespace NETCore.Model
         [JsonIgnore]
         public virtual Profiling Profiling { get; set; }
 
+        public Account(string nIK, string password)
+        {
+            NIK = nIK;
+            Password = password;
+        }
     }
 }
