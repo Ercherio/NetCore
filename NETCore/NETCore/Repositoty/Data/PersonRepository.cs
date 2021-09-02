@@ -39,7 +39,7 @@ namespace NETCore.Repositoty.Data
                                     gender = (PersonVM.Gender)p.gender,
                                     Salary = p.Salary,
                                     Email = p.Email,
-                                    Password = a.Password,
+                                    //Password = a.Password,
                                     Degree = e.Degree,
                                     GPA = e.GPA,
                                     UniversityId = u.Id
@@ -69,7 +69,7 @@ namespace NETCore.Repositoty.Data
                                     gender = (PersonVM.Gender)p.gender,
                                     Salary = p.Salary,
                                     Email = p.Email,
-                                    Password = a.Password,
+                                    //Password = a.Password,
                                     Degree = e.Degree,
                                     GPA = e.GPA,
                                     UniversityId = u.Id
@@ -122,7 +122,8 @@ namespace NETCore.Repositoty.Data
 
 
 
-                Account account = new Account(personVM.NIK, personVM.Password);
+                Account account = new Account(personVM.NIK, 
+                    BCrypt.Net.BCrypt.HashPassword(personVM.Password));
                 myContext.Accounts.Add(account);
                 myContext.SaveChanges();
 
@@ -176,7 +177,8 @@ namespace NETCore.Repositoty.Data
             {
                 return 100;
             }
-            if (account.Password != loginVM.Password)
+            //if (account.Password != loginVM.Password)
+            if(!BCrypt.Net.BCrypt.Verify(loginVM.Password, account.Password))
             {
                 return 200;
             }

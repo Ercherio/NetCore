@@ -136,3 +136,4 @@ C:\Users\rioga\OneDrive\Documents\GitHub\NetCore\NETCore\NETCore\obj\Debug\netco
 C:\Users\rioga\OneDrive\Documents\GitHub\NetCore\NETCore\NETCore\obj\Debug\netcoreapp3.1\NETCore.dll
 C:\Users\rioga\OneDrive\Documents\GitHub\NetCore\NETCore\NETCore\obj\Debug\netcoreapp3.1\NETCore.pdb
 C:\Users\rioga\OneDrive\Documents\GitHub\NetCore\NETCore\NETCore\obj\Debug\netcoreapp3.1\NETCore.genruntimeconfig.cache
+C:\Users\rioga\OneDrive\Documents\GitHub\NetCore\NETCore\NETCore\bin\Debug\netcoreapp3.1\BCrypt.Net-Core.dll

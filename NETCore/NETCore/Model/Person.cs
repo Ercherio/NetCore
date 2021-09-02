@@ -37,7 +37,7 @@ namespace NETCore.Model
 
         [JsonConverter(typeof(StringEnumConverter))]
         public Gender gender { get; set; }
-
+        public string Token { get; set; }
 
 
         [JsonIgnore]

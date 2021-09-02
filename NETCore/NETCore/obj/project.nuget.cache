@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "uIfyXMQityiXy+pY/vm2UsguTijEC0USauy8jD5I7z3sPUQEbqcgtTWeev/AskIvdn6tGZKfskbCIDFxnAOxyA==",
+  "dgSpecHash": "WeLkXVB72Gh7CfnaiaKsrNJFf8kOTpYdi5n7QsEeRMfG9Md29PcMLtDa3zR9u2kX/arfzDUDp9Ir7hIAVeLMgg==",
   "success": true,
   "projectFilePath": "C:\\Users\\rioga\\OneDrive\\Documents\\GitHub\\NetCore\\NETCore\\NETCore\\NETCore.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\rioga\\.nuget\\packages\\bcrypt.net-core\\1.6.0\\bcrypt.net-core.1.6.0.nupkg.sha512",
     "C:\\Users\\rioga\\.nuget\\packages\\castle.core\\4.4.1\\castle.core.4.4.1.nupkg.sha512",
     "C:\\Users\\rioga\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\rioga\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\3.0.0\\microsoft.aspnetcore.jsonpatch.3.0.0.nupkg.sha512",
