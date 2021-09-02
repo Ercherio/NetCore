@@ -62,12 +62,12 @@ namespace NETCore.Controllers
                 });
                 return get;
             }
-            else
+            else 
             {
                 var get = NotFound(new
                 {
                     status = HttpStatusCode.NotFound,
-                    result = getPerson,
+                    result =getPerson,
                     message = "Data Empty"
                 });
                 return get;
@@ -103,7 +103,7 @@ namespace NETCore.Controllers
                     return BadRequest(new
                     {
                         status = HttpStatusCode.BadRequest,
-                        message = "Duplicate Email",
+                        message = "Duplicate Phone Number",
                         /*error = e*/
                     });
                 }
@@ -111,7 +111,7 @@ namespace NETCore.Controllers
                 {
                     /*statusCode = StatusCode(200),*/
                     status = HttpStatusCode.OK,
-                    message = "Success"
+                    message = "Registration Success"
                 });
             }
             catch

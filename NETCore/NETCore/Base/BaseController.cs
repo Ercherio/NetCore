@@ -28,10 +28,10 @@ namespace NETCore.Base
         {
             try
             {
-                if (repository.Insert(entity) > 0)
-                {
-                    return Ok(new { status = HttpStatusCode.OK, message = "Data Berhasil ditambahkan" });
-                }
+                //if (repository.Insert(entity) > 0)
+                //{
+                //    return Ok(new { status = HttpStatusCode.OK, message = "Data Berhasil ditambahkan" });
+                //}
                 //else if (repository.Insert(entity) == 0)
                 //{
                 //    return BadRequest(new { status = HttpStatusCode.BadRequest, message = "Gagal Menambahkan Data" });
@@ -40,12 +40,24 @@ namespace NETCore.Base
                 //{
                 //    return BadRequest(new { status = HttpStatusCode.BadRequest, message = "Data Sudah ada" });
                 //}
+                repository.Insert(entity);
+                return Ok(new
+                {
+                    statusCode = StatusCode(200),
+                    status = HttpStatusCode.OK,
+                    message = "Success"
+                });
             }
             catch (Exception)
             {
-
+                return BadRequest(new
+                {
+                    status = HttpStatusCode.BadRequest,
+                    message = "Error duplicate data",
+                    error = entity,
+                });
             }
-                return BadRequest(new { status = HttpStatusCode.BadRequest, message = "Data Sudah ada" });
+                //return BadRequest(new { status = HttpStatusCode.BadRequest, message = "Data Sudah ada" });
 
         }
         [HttpGet]

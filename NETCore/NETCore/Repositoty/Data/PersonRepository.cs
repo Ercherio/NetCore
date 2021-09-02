@@ -73,12 +73,13 @@ namespace NETCore.Repositoty.Data
                                     Degree = e.Degree,
                                     GPA = e.GPA,
                                     UniversityId = u.Id
-                                }).Where(p => p.NIK == NIK).First();
+                                }).Where(p => p.NIK == NIK).FirstOrDefault();
             return getPersonVMs;
         }
 
         public int Insert(PersonVM personVM)
         {
+            //int insert;
             try
             {
                 /*myContext.per.Add(entity);*/
@@ -95,19 +96,19 @@ namespace NETCore.Repositoty.Data
                 Person person = new Person();
 
                 //input data ke objek
-                person.Email = personVM.Email;
-                if (isDuplicate(personVM.Email.ToString(), "Email") == true) // cek Email Duplicate
-                {
-                    return 100;
-                }
-                person.FirstName = personVM.FirstName;
                 person.NIK = personVM.NIK;
                 if (isDuplicate(personVM.NIK.ToString(), "NIK") == true)
                 {
                     return 200;
                 }
-
+                person.FirstName = personVM.FirstName;
                 person.LastName = personVM.LastName;
+                person.Email = personVM.Email;
+                if (isDuplicate(personVM.Email.ToString(), "Email") == true) // cek Email Duplicate
+                {
+                    return 100;
+                }
+
                 person.Phone = personVM.Phone;
                 if (isDuplicate(personVM.Phone.ToString(), "Phone") == true)
                 {
@@ -127,6 +128,10 @@ namespace NETCore.Repositoty.Data
 
                 /*University university = new University("Temp Name");
                 myContext.Universities.Add(university);*/
+                //if (personVM.UniversityId == 0)
+                //{
+                //    insert = 0;
+                //}
 
                 Education education = new Education(personVM.Degree, personVM.GPA, personVM.UniversityId);
                 myContext.Educations.Add(education);

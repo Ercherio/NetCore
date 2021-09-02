@@ -31,7 +31,7 @@ namespace NETCore.Model
 
         public enum Gender
         {
-            Mele,
+            Male,
             Famale
         }
 

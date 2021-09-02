@@ -9,9 +9,56 @@ namespace NETCore.Repositoty.Data
 {
     public class AccountRepository:GeneralRepository<MyContext,Account, string>
     {
+        private readonly MyContext myContext;
         public AccountRepository(MyContext myContext): base(myContext)
         {
+            this.myContext = myContext;
+        }
 
+        public int ForgetPassword(string email)
+        {
+            /*Guid myuuid = Guid.NewGuid().ToString();
+            string newPassword = myuuid.ToString();*/
+            //100 = email ga ketemu
+            var checkEmail = myContext.Persons.Where(e => e.Email == email).FirstOrDefault();
+            if (checkEmail == null)
+            {
+                return 100;
+            }
+            var account = myContext.Accounts.Where(n => n.NIK == checkEmail.NIK).FirstOrDefault();
+            if (account == null)
+            {
+                return 100;
+            }
+            /*account.Password = Guid.NewGuid().ToString();*/
+            string bodyEmail = $"Kamu lupa password ? Kalau iya, klik di sini https://localhost:44377/api/Accounts/reset-password/email={checkEmail.Email}&token={checkEmail.NIK}, else abaikan";
+            Email(bodyEmail, checkEmail.Email);
+            return 1;
+        }
+
+        public int ResetPassword(string email, string NIK)
+        {
+            //return 100 = NIK salah
+            //return 200 = email salah
+            var checkEmail = myContext.Persons.Where(e => e.Email == email).FirstOrDefault();
+            if (checkEmail == null)
+            {
+                return 200;
+            }
+            if (checkEmail.NIK != NIK)
+            {
+                return 100;
+            }
+            var account = myContext.Accounts.Where(n => n.NIK == checkEmail.NIK).FirstOrDefault();
+            if (account == null)
+            {
+                return 100;
+            }
+            account.Password = Guid.NewGuid().ToString();
+            /*myContext.SaveChanges();*/
+            Update(account);
+            //kirim email
+            return 1;
         }
     }
 }

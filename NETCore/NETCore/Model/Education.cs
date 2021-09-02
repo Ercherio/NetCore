@@ -23,10 +23,14 @@ namespace NETCore.Model
         [JsonIgnore]
         public virtual University University { get; set; }
 
-        public Education(string degree, string gPA, int universityId)
+        public Education(string degree, string gPA)
         {
             Degree = degree;
             GPA = gPA;
+        }
+
+        public Education(string degree, string gPA, int universityId) : this(degree, gPA)
+        {
             UniversityId = universityId;
         }
     }
