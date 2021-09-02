@@ -75,12 +75,12 @@ namespace NETCore.Repositoty
         public static void Email(string htmlString, string toMailAddress)
         {
             string fromMail = "ercheriom@gmail.com";
-            string fromPassword = "Vongola_123";
+            string fromPassword = "PASSWORD LU";
             MailMessage message = new MailMessage();
 
             message.From = new MailAddress(fromMail);
             message.To.Add(new MailAddress(toMailAddress));
-            message.Subject = "Test";
+            message.Subject = "Link Ganti Password";
             message.Body = "<html><body>" + htmlString + "<html><body>";
             message.IsBodyHtml = true;
             var smtpClient = new SmtpClient("smtp.gmail.com")
