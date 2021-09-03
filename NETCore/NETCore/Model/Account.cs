@@ -18,7 +18,12 @@ namespace NETCore.Model
 
         [Required]
         [StringLength(100,MinimumLength =8)]
+
+        
         public string Password { get; set; }
+
+        [JsonIgnore]
+        public int RoleId { get; set; }
 
         [JsonIgnore]
         public virtual Person Person { get; set; }
@@ -26,6 +31,8 @@ namespace NETCore.Model
         [JsonIgnore]
         public virtual Profiling Profiling { get; set; }
 
+        [JsonIgnore]
+        public virtual Role Role { get; set; }
         public Account(string nIK, string password)
         {
             NIK = nIK;

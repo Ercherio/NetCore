@@ -32,6 +32,9 @@ namespace NETCore.Context
             modelBuilder.Entity<Profiling>()
                 .HasOne(education => education.Education).WithMany(profiling => profiling.Profilings);
 
+            modelBuilder.Entity<Account>()
+               .HasOne(role=>role.Role).WithMany(account => account.Accounts);
+
             modelBuilder.Entity<University>()
                 .HasMany(education => education.Educations).WithOne(university => university.University);
             //modelBuilder.Entity<Person>().ToTable("tb_tr_accounts");
@@ -48,10 +51,11 @@ namespace NETCore.Context
         public DbSet<Profiling> Profilings { get; set; }
         public DbSet<University> Universities { get; set; }
         public DbSet<Account> Accounts { get; set; }
+        public DbSet<Role> Roles { get; set; }
 
-            
 
-       
+
+
 
     }
 }
