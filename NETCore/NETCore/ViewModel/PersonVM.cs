@@ -29,15 +29,11 @@ namespace NETCore.ViewModel
         [Required]
         [EmailAddress]
         public string Email { get; set; }
-        public enum Gender
-        {
-            Male,
-            Female
-        }
+     
 
         [Range(0,1)]
         [JsonConverter(typeof(StringEnumConverter))]
-        public Gender gender { get; set; }
+        public int Gender { get; set; }
 
         [Required]
         [StringLength(100,MinimumLength =8)]

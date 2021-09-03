@@ -14,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.OpenApi.Models;
 
 namespace NETCore
 {
@@ -48,6 +49,18 @@ namespace NETCore
             services.AddDbContext<MyContext>(options => options.UseLazyLoadingProxies()
                 .UseSqlServer(Configuration.GetConnectionString("NETCoreContext")));
             //services.AddDbContext<MyContext>(options => options.UseSqlServer);
+
+
+            //Add Swagger
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", 
+                    new OpenApiInfo
+                {
+                    Title = "Register Service API",
+                    Version = "v1",
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -68,6 +81,10 @@ namespace NETCore
             {
                 endpoints.MapControllers();
             });
+
+            app.UseSwagger();
+            app.UseSwaggerUI(options => options.SwaggerEndpoint("/swagger/v1/swagger.json",
+                "NET Core"));
         }
     }
 }
