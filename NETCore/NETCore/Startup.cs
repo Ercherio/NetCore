@@ -57,7 +57,7 @@ namespace NETCore
                 c.SwaggerDoc("v1", 
                     new OpenApiInfo
                 {
-                    Title = "Register Service API",
+                    Title = "My API",
                     Version = "v1",
                 });
             });
