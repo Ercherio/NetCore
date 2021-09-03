@@ -13,8 +13,14 @@ namespace NETCore.Model
     {
         [Key]
         public int Id { get; set; }
+
+        [Required]
         public string Degree { get; set; }
+
+        [Required]
         public string GPA { get; set; }
+
+        [Required]
         public int UniversityId { get; set; }
 
         [JsonIgnore]

@@ -15,6 +15,9 @@ namespace NETCore.Model
         [Key] //anotasi primari key
         public string NIK { get; set; }
 
+
+        [Required]
+        [Range(1,100000)]
         public int Education_Id { get; set; }
 
 

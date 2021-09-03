@@ -21,34 +21,25 @@ namespace NETCore.Repositoty.Data
             /*Guid myuuid = Guid.NewGuid().ToString();
             string newPassword = myuuid.ToString();*/
             //100 = email ga ketemu
-            var checkEmail = myContext.Persons.Where(e => e.Email == email).FirstOrDefault();
-            if (checkEmail == null)
-            {
-                return 100;
-            }
-            var account = myContext.Accounts.Where(n => n.NIK == checkEmail.NIK).FirstOrDefault();
-            if (account == null)
-            {
-                return 100;
-            }
-            /*account.Password = Guid.NewGuid().ToString();*/
-            checkEmail.Token = Guid.NewGuid().ToString();
-            string bodyEmail = $"Kamu lupa password ? Kalau iya, klik di sini https://localhost:44377/api/Accounts/reset-password/email={checkEmail.Email}&token={checkEmail.Token}, else abaikan";
-            Email(bodyEmail, checkEmail.Email);
-            myContext.SaveChanges();
-            return 1;
-        }
+            //var checkEmail = myContext.Persons.Where(e => e.Email == email).FirstOrDefault();
+            //if (checkEmail == null)
+            //{
+            //    return 100;
+            //}
+            //var account = myContext.Accounts.Where(n => n.NIK == checkEmail.NIK).FirstOrDefault();
+            //if (account == null)
+            //{
+            //    return 100;
+            //}
+            ///*account.Password = Guid.NewGuid().ToString();*/
+            //checkEmail.Token = Guid.NewGuid().ToString();
+            //string bodyEmail = $"Kamu lupa password ? Kalau iya, klik di sini https://localhost:44377/api/Accounts/reset-password/email={checkEmail.Email}&token={checkEmail.Token}, else abaikan";
+            //Email(bodyEmail, checkEmail.Email);
+            //myContext.SaveChanges();
+            //return 1;
 
-        public int ResetPassword(string email, string Token)
-        {
-            //return 100 = NIK salah
-            //return 200 = email salah
             var checkEmail = myContext.Persons.Where(e => e.Email == email).FirstOrDefault();
             if (checkEmail == null)
-            {
-                return 200;
-            }
-            if (checkEmail.Token != Token)
             {
                 return 100;
             }
@@ -63,13 +54,45 @@ namespace NETCore.Repositoty.Data
             /*myContext.SaveChanges();*/
             Update(account);
 
-            checkEmail.Token = null;
-            myContext.SaveChanges();
+            //checkEmail.Token = null;
+            //myContext.SaveChanges();
             //kirim email
             string bodyEmail = $"Password baru Anda: {newPassword}, Jangan sebarkan dan segera lakukan change password";
             Email(bodyEmail, checkEmail.Email);
             return 1;
         }
+
+        //public int ResetPassword(string email, string Token)
+        //{
+        //    //return 100 = NIK salah
+        //    //return 200 = email salah
+        //    var checkEmail = myContext.Persons.Where(e => e.Email == email).FirstOrDefault();
+        //    if (checkEmail == null)
+        //    {
+        //        return 200;
+        //    }
+        //    if (checkEmail.Token != Token)
+        //    {
+        //        return 100;
+        //    }
+        //    var account = myContext.Accounts.Where(n => n.NIK == checkEmail.NIK).FirstOrDefault();
+        //    if (account == null)
+        //    {
+        //        return 100;
+        //    }
+
+        //    string newPassword = Guid.NewGuid().ToString();
+        //    account.Password = BCrypt.Net.BCrypt.HashPassword(newPassword);
+        //    /*myContext.SaveChanges();*/
+        //    Update(account);
+
+        //    checkEmail.Token = null;
+        //    myContext.SaveChanges();
+        //    //kirim email
+        //    string bodyEmail = $"Password baru Anda: {newPassword}, Jangan sebarkan dan segera lakukan change password";
+        //    Email(bodyEmail, checkEmail.Email);
+        //    return 1;
+        //}
 
         public int ChangePassword(ChangePasswordVM cpVM)
         {

@@ -15,14 +15,21 @@ namespace NETCore.Model
         [Key]   //anotasi Primary Key
         public string NIK { get; set; }
 
+        [Required]
         public string FirstName { get; set; }
 
+        [Required]
         public string LastName { get; set; }
 
+        [Required]
+        [Phone]
         public string Phone { get; set; }
 
+        [Required]
         public DateTime BirthDate { get; set; }
 
+        [Required]
+        [Range(10000000,1000000000)]
         public int Salary { get; set; }
 
         [Required]

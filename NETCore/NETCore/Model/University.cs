@@ -13,6 +13,9 @@ namespace NETCore.Model
     {
         [Key]
         public int Id { get; set; }
+
+        [Required]
+        [StringLength(50, MinimumLength =8)]
         public string Name { get; set; }
 
         [JsonIgnore]

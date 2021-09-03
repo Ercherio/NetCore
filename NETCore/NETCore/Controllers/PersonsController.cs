@@ -79,7 +79,21 @@ namespace NETCore.Controllers
         {
             try
             {
-                int output = repository.Insert(personVM);
+                int output = 0;
+                if (ModelState.IsValid)
+                {
+
+                     output = repository.Insert(personVM);
+                }
+                else
+                {
+                    return BadRequest(new
+                    {
+                        status = HttpStatusCode.BadRequest,
+                        message = "Check Format",
+                        /*error = e*/
+                    });
+                }
                 if (output == 100)
                 {
                     return BadRequest(new

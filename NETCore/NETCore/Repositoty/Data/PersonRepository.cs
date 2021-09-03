@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Http.ModelBinding;
 using static NETCore.Model.Person;
 
 namespace NETCore.Repositoty.Data
@@ -117,9 +118,13 @@ namespace NETCore.Repositoty.Data
                 person.BirthDate = personVM.BirthDate;
                 person.Salary = personVM.Salary;
                 person.gender = (Gender)personVM.gender;
+                //if (myContext.IsValid)
+                //{
+
+                //}               
                 myContext.Persons.Add(person);
                 myContext.SaveChanges();
-
+                
 
 
                 Account account = new Account(personVM.NIK, 
