@@ -1,27 +1,40 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using NETCore.Base;
+using NETCore.Context;
 using NETCore.Model;
 using NETCore.Repositoty.Data;
 using NETCore.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace NETCore.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
-    public class PersonsController : BaseController<Person,PersonRepository, string>
+    public class PersonsController : BaseController<Person, PersonRepository, string>
     {
+        public IConfiguration configuration;
         private readonly PersonRepository repository;
-        public PersonsController(PersonRepository repository): base(repository)
+        private readonly MyContext myContext;
+        public PersonsController(PersonRepository repository, IConfiguration configuration, MyContext myContext) : base(repository)
         {
             this.repository = repository;
+            this.configuration = configuration;
+            this.myContext = myContext;
         }
 
+        [Authorize]
         [HttpGet("GetPerson")]
         public ActionResult GetPerson()
         {
@@ -32,7 +45,7 @@ namespace NETCore.Controllers
                 {
                     status = HttpStatusCode.OK,
                     result = getPerson,
-                    message = "Success"
+                    message = "Success to Display Data"
                 });
                 return get;
             }
@@ -48,6 +61,7 @@ namespace NETCore.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet("GetPerson/{NIK}")]
         public ActionResult GetPerson(string NIK)
         {
@@ -58,7 +72,7 @@ namespace NETCore.Controllers
                 {
                     status = HttpStatusCode.OK,
                     result = getPerson,
-                    message = "Success"
+                    message = "Success to Display Data"
                 });
                 return get;
             }
@@ -121,6 +135,8 @@ namespace NETCore.Controllers
                         /*error = e*/
                     });
                 }
+
+
                 return Ok(new
                 {
                     /*statusCode = StatusCode(200),*/
@@ -139,9 +155,14 @@ namespace NETCore.Controllers
             }
         }
 
+       
+
+        [AllowAnonymous]
         [HttpPost("Login")]
         public ActionResult Login(LoginVM loginVM)
         {
+
+           
             int output = repository.Login(loginVM);
             if (output == 100)
             {
@@ -161,11 +182,59 @@ namespace NETCore.Controllers
                     /*error = e*/
                 });
             }
+
+            //var  claims = new List<Claim>();
+
+            var data = (from p in myContext.Persons
+                       join a in myContext.Accounts on
+                       p.NIK equals a.NIK
+                       join ar in myContext.AccountRoles on
+                       a.NIK equals ar.AccountId
+                       join r in myContext.Roles on
+                       ar.RoleId equals r.Id
+                       where p.Email == $"{loginVM.Email}"
+                       select new PayloadVM
+                       {
+                           NIK = p.NIK,
+                           Email = p.Email,
+                           RoleName = r.Name
+                       }).ToList();
+
+            var claims = new List<Claim>();
+            claims.Add(new Claim("NIK", data[0].NIK));
+            claims.Add(new Claim("Email", data[0].Email));
+            foreach (var d in data)
+            {
+                claims.Add(new Claim("Roles", d.RoleName));
+            }
+
+            //var claims = new[]
+            //{
+            //        //new Claim(ClaimTypes.Role, getRole.Name),
+            //        //new Claim(ClaimTypes.Role, getRole.RoleName),
+            //        new Claim("NIK", getUserData.NIK),
+            //        new Claim("Email", getUserData.Email),
+            //        new Claim("Role Name", getRole.RoleName)
+            //    };
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]));
+
+            var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+            var token = new JwtSecurityToken(
+                configuration["Jwt:Issuer"], 
+                configuration["Jwt:Audience"], 
+                claims, 
+                expires: DateTime.UtcNow.AddDays(1), 
+                signingCredentials: signIn);
+
+            var idToken= new JwtSecurityTokenHandler().WriteToken(token);
             return Ok(new
             {
                 /*statusCode = StatusCode(200),*/
                 status = HttpStatusCode.OK,
-                message = "Success"
+                token = idToken,
+                message = "Login Success"
             });
 
         }

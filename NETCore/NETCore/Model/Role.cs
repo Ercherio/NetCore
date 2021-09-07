@@ -18,6 +18,11 @@ namespace NETCore.Model
         public string Name { get; set; }
 
         [JsonIgnore]
-        public virtual ICollection<Account> Accounts { get; set; }
+        public virtual ICollection<AccountRole> AccountRoles { get; set; }
+
+        public Role(int id)
+        {
+            Id = id;
+        }
     }
 }

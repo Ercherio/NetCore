@@ -1,10 +1,14 @@
-﻿using Newtonsoft.Json;
+﻿using NETCore.Model;
 using Newtonsoft.Json.Converters;
+using Newtonsoft.Json;
+//using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+//using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using static NETCore.Model.Person;
 
 namespace NETCore.ViewModel
 {
@@ -29,11 +33,13 @@ namespace NETCore.ViewModel
         [Required]
         [EmailAddress]
         public string Email { get; set; }
-     
 
+
+       
         [Range(0,1)]
+
         [JsonConverter(typeof(StringEnumConverter))]
-        public int Gender { get; set; }
+        public Gender Gender { get; set; }
 
         [Required]
         [StringLength(100,MinimumLength =8)]
@@ -47,6 +53,10 @@ namespace NETCore.ViewModel
 
         [Required]
         public int UniversityId { get; set; }
+
+        public int RoleId {get;  set; }
+
+        public ICollection<AccountRole> AccountRoles { get; internal set; }
 
 
     }

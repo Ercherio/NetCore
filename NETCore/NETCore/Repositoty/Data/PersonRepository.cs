@@ -21,6 +21,10 @@ namespace NETCore.Repositoty.Data
             var getPersonVMs = (from p in myContext.Persons
                                 join a in myContext.Accounts on
                                 p.NIK equals a.NIK
+                                join ar in myContext.AccountRoles on
+                                a.NIK equals ar.AccountId
+                                join r in myContext.Roles on
+                                ar.RoleId equals r.Id
                                 join prf in myContext.Profilings on
                                 a.NIK equals prf.NIK
                                 join e in myContext.Educations on
@@ -35,13 +39,15 @@ namespace NETCore.Repositoty.Data
                                     LastName = p.LastName,
                                     Phone = p.Phone,
                                     BirthDate = p.BirthDate,
-                                    Gender = (int)p.gender,
+                                    Gender = p.gender,
                                     Salary = p.Salary,
                                     Email = p.Email,
-                                    //Password = a.Password,
+                                    Password = a.Password,
                                     Degree = e.Degree,
                                     GPA = e.GPA,
-                                    UniversityId = u.Id
+                                    RoleId = ar.RoleId,
+                                    UniversityId = u.Id,
+                                    AccountRoles = a.AccountRoles
                                 }).ToList();
             return getPersonVMs;
         }
@@ -51,6 +57,10 @@ namespace NETCore.Repositoty.Data
             var getPersonVMs = (from p in myContext.Persons
                                 join a in myContext.Accounts on
                                 p.NIK equals a.NIK
+                                join ar in myContext.AccountRoles on
+                                a.NIK equals ar.AccountId
+                                join r in myContext.Roles on
+                                ar.RoleId equals r.Id
                                 join prf in myContext.Profilings on
                                 a.NIK equals prf.NIK
                                 join e in myContext.Educations on
@@ -65,16 +75,19 @@ namespace NETCore.Repositoty.Data
                                     LastName = p.LastName,
                                     Phone = p.Phone,
                                     BirthDate = p.BirthDate,
-                                    Gender = (int)p.gender,
+                                    Gender = p.gender,
                                     Salary = p.Salary,
                                     Email = p.Email,
-                                    //Password = a.Password,
+                                    Password = a.Password,
                                     Degree = e.Degree,
                                     GPA = e.GPA,
-                                    UniversityId = u.Id
+                                    UniversityId = u.Id,
+                                    RoleId=ar.RoleId,
+                                    AccountRoles = a.AccountRoles
                                 }).Where(p => p.NIK == NIK).FirstOrDefault();
             return getPersonVMs;
         }
+       
 
         public int Insert(PersonVM personVM)
         {
@@ -122,7 +135,7 @@ namespace NETCore.Repositoty.Data
                 //}               
                 myContext.Persons.Add(person);
                 myContext.SaveChanges();
-                
+
 
 
                 Account account = new Account(personVM.NIK, 
@@ -130,6 +143,16 @@ namespace NETCore.Repositoty.Data
                 myContext.Accounts.Add(account);
                 myContext.SaveChanges();
 
+                //if (personVM.RoleId == 0)
+                //{
+                //    personVM.RoleId = 1;
+
+                //}
+
+
+                AccountRole accountRole = new AccountRole(personVM.NIK, personVM.RoleId);
+                myContext.AccountRoles.Add(accountRole);
+                myContext.SaveChanges();
                 /*University university = new University("Temp Name");
                 myContext.Universities.Add(university);*/
                 //if (personVM.UniversityId == 0)
@@ -185,8 +208,36 @@ namespace NETCore.Repositoty.Data
             {
                 return 200;
             }
+
+
             return 1;
         }
+
+        //public RoleVM GetRole(string nIK, int roleId)
+        //{
+        //    if (nIK == null && roleId < 0)
+        //    {
+        //        return null;
+        //    }
+
+        //    if(myContext.AccountRoles.Where(a => a.AccountId == nIK && a.RoleId == roleId).Count()< 0)
+        //    {
+        //        return null;
+        //    }
+
+        //    return (from acc in myContext.Accounts
+        //            join accrole in myContext.AccountRoles on
+        //            acc.NIK equals accrole.AccountId
+        //            join role in myContext.Roles on
+        //            accrole.RoleId equals role.Id
+        //            select new RoleVM
+        //            {
+        //                NIK = acc.NIK,
+        //                RoleId = accrole.RoleId,
+        //                RoleName = role.Name
+
+        //            }).Where(acc => acc.NIK == nIK && acc.RoleId == roleId).FirstOrDefault();
+        //}
 
 
     }
