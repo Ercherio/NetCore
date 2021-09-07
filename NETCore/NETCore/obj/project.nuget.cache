@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "MYUhBEvgEqz/Tkqw4pVTxesiGs8a+ysG2YrKX4W0pqOhc4xghJb6uF9l3tGg7nMzkrNpVB+gys6wIywpCfmOjA==",
+  "dgSpecHash": "M2ReVAmxNEqFgSN8cuo63KW4pdKWm8B9t6XAavd95M/hUc3vC+PErKwryERDA6F7Drpta7C0kWxEuJKfJJ4U8g==",
   "success": true,
   "projectFilePath": "C:\\Users\\rioga\\OneDrive\\Documents\\GitHub\\NetCore\\NETCore\\NETCore\\NETCore.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\rioga\\.nuget\\packages\\bcrypt.net-core\\1.6.0\\bcrypt.net-core.1.6.0.nupkg.sha512",
     "C:\\Users\\rioga\\.nuget\\packages\\castle.core\\4.4.1\\castle.core.4.4.1.nupkg.sha512",
     "C:\\Users\\rioga\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
+    "C:\\Users\\rioga\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\3.1.8\\microsoft.aspnetcore.authentication.jwtbearer.3.1.8.nupkg.sha512",
     "C:\\Users\\rioga\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\3.0.0\\microsoft.aspnetcore.jsonpatch.3.0.0.nupkg.sha512",
     "C:\\Users\\rioga\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\3.0.0\\microsoft.aspnetcore.mvc.newtonsoftjson.3.0.0.nupkg.sha512",
     "C:\\Users\\rioga\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

@@ -54,7 +54,7 @@ namespace NETCore.ViewModel
         [Required]
         public int UniversityId { get; set; }
 
-        public int RoleId {get;  set; }
+        public int RoleId {internal get;  set; }
 
         public ICollection<AccountRole> AccountRoles { get; internal set; }
 

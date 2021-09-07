@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -34,12 +35,13 @@ namespace NETCore.Controllers
             this.myContext = myContext;
         }
 
-        [Authorize]
+        //[Authorize(Roles ="User")]
+        [EnableCors("AllowOrigin")]
         [HttpGet("GetPerson")]
         public ActionResult GetPerson()
         {
             var getPerson = repository.GetPersonVMs();
-            if (getPerson != null)
+            if (getPerson.Count() >0)
             {
                 var get = Ok(new
                 {
@@ -200,13 +202,13 @@ namespace NETCore.Controllers
                            RoleName = r.Name
                        }).ToList();
 
-            var claims = new List<Claim>();
-            claims.Add(new Claim("NIK", data[0].NIK));
-            claims.Add(new Claim("Email", data[0].Email));
-            foreach (var d in data)
-            {
-                claims.Add(new Claim("Roles", d.RoleName));
-            }
+            //var claims = new List<Claim>();
+            //claims.Add(new Claim("NIK", data[0].NIK));
+            //claims.Add(new Claim("Email", data[0].Email));
+            //foreach (var d in data)
+            //{
+            //    claims.Add(new Claim("Role", d.RoleName));
+            //}
 
             //var claims = new[]
             //{
@@ -217,6 +219,15 @@ namespace NETCore.Controllers
             //        new Claim("Role Name", getRole.RoleName)
             //    };
 
+            var identity = new ClaimsIdentity("JWT");
+
+            identity.AddClaim(new Claim(JwtRegisteredClaimNames.Sub, configuration["Jwt:Subject"]));
+            identity.AddClaim(new Claim("email", loginVM.Email));
+            foreach (var item in data)
+            {
+                identity.AddClaim(new Claim("role", item.RoleName));
+            }
+
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]));
 
             var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
@@ -224,7 +235,7 @@ namespace NETCore.Controllers
             var token = new JwtSecurityToken(
                 configuration["Jwt:Issuer"], 
                 configuration["Jwt:Audience"], 
-                claims, 
+                identity.Claims, 
                 expires: DateTime.UtcNow.AddDays(1), 
                 signingCredentials: signIn);
 

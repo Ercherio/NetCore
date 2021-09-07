@@ -21,10 +21,10 @@ namespace NETCore.Repositoty.Data
             var getPersonVMs = (from p in myContext.Persons
                                 join a in myContext.Accounts on
                                 p.NIK equals a.NIK
-                                join ar in myContext.AccountRoles on
-                                a.NIK equals ar.AccountId
-                                join r in myContext.Roles on
-                                ar.RoleId equals r.Id
+                                //join ar in myContext.AccountRoles on
+                                //a.NIK equals ar.AccountId
+                                //join r in myContext.Roles on
+                                //ar.RoleId equals r.Id
                                 join prf in myContext.Profilings on
                                 a.NIK equals prf.NIK
                                 join e in myContext.Educations on
@@ -45,7 +45,6 @@ namespace NETCore.Repositoty.Data
                                     Password = a.Password,
                                     Degree = e.Degree,
                                     GPA = e.GPA,
-                                    RoleId = ar.RoleId,
                                     UniversityId = u.Id,
                                     AccountRoles = a.AccountRoles
                                 }).ToList();
@@ -57,10 +56,10 @@ namespace NETCore.Repositoty.Data
             var getPersonVMs = (from p in myContext.Persons
                                 join a in myContext.Accounts on
                                 p.NIK equals a.NIK
-                                join ar in myContext.AccountRoles on
-                                a.NIK equals ar.AccountId
-                                join r in myContext.Roles on
-                                ar.RoleId equals r.Id
+                                //join ar in myContext.AccountRoles on
+                                //a.NIK equals ar.AccountId
+                                //join r in myContext.Roles on
+                                //ar.RoleId equals r.Id
                                 join prf in myContext.Profilings on
                                 a.NIK equals prf.NIK
                                 join e in myContext.Educations on
@@ -82,7 +81,7 @@ namespace NETCore.Repositoty.Data
                                     Degree = e.Degree,
                                     GPA = e.GPA,
                                     UniversityId = u.Id,
-                                    RoleId=ar.RoleId,
+                                    //RoleId=ar.RoleId,
                                     AccountRoles = a.AccountRoles
                                 }).Where(p => p.NIK == NIK).FirstOrDefault();
             return getPersonVMs;
