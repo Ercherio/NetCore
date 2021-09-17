@@ -100,6 +100,7 @@ C:\Users\rioga\OneDrive\Documents\GitHub\NetCore\NETCore\ImplementCors\obj\Debug
 C:\Users\rioga\OneDrive\Documents\GitHub\NetCore\NETCore\ImplementCors\obj\Debug\netcoreapp3.1\Razor\Views\LatihanCSS\Index.cshtml.g.cs
 C:\Users\rioga\OneDrive\Documents\GitHub\NetCore\NETCore\ImplementCors\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
 C:\Users\rioga\OneDrive\Documents\GitHub\NetCore\NETCore\ImplementCors\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
+C:\Users\rioga\OneDrive\Documents\GitHub\NetCore\NETCore\ImplementCors\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LayoutAdmin.cshtml.g.cs
 C:\Users\rioga\OneDrive\Documents\GitHub\NetCore\NETCore\ImplementCors\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
 C:\Users\rioga\OneDrive\Documents\GitHub\NetCore\NETCore\ImplementCors\obj\Debug\netcoreapp3.1\Razor\Views\TestCors\Index.cshtml.g.cs
 C:\Users\rioga\OneDrive\Documents\GitHub\NetCore\NETCore\ImplementCors\obj\Debug\netcoreapp3.1\Razor\Views\_ViewImports.cshtml.g.cs
@@ -111,4 +112,3 @@ C:\Users\rioga\OneDrive\Documents\GitHub\NetCore\NETCore\ImplementCors\obj\Debug
 C:\Users\rioga\OneDrive\Documents\GitHub\NetCore\NETCore\ImplementCors\obj\Debug\netcoreapp3.1\ImplementCors.dll
 C:\Users\rioga\OneDrive\Documents\GitHub\NetCore\NETCore\ImplementCors\obj\Debug\netcoreapp3.1\ImplementCors.pdb
 C:\Users\rioga\OneDrive\Documents\GitHub\NetCore\NETCore\ImplementCors\obj\Debug\netcoreapp3.1\ImplementCors.genruntimeconfig.cache
-C:\Users\rioga\OneDrive\Documents\GitHub\NetCore\NETCore\ImplementCors\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LayoutAdmin.cshtml.g.cs

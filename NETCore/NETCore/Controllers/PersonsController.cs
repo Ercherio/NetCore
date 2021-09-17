@@ -20,7 +20,7 @@ using System.Threading.Tasks;
 
 namespace NETCore.Controllers
 {
-
+    [EnableCors("AllowAllOrigins")]
     [Route("api/[controller]")]
     [ApiController]
     public class PersonsController : BaseController<Person, PersonRepository, string>

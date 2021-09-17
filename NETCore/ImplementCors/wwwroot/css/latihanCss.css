@@ -145,3 +145,7 @@ h1 {
 .modal-header#header{
     background-color: aquamarine;
 }
+
+.btn btn-primary#btn-detail {
+    padding-right: 55px;
+}

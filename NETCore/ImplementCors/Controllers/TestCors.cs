@@ -12,5 +12,6 @@ namespace ImplementCors.Controllers
         {
             return View();
         }
+
     }
 }

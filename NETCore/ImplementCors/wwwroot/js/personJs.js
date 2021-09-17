@@ -25,6 +25,97 @@
 
 
 $(document).ready(function () {
+
+    $.ajax({
+        url: 'https://localhost:5001/api/Persons/GetPerson',
+        type: "GET"
+    }).done((result) => {
+        console.log(result);
+        var female = result.result.filter(data => data.gender === "Female").length;
+        var male = result.result.filter(data => data.gender === "Male").length;
+        console.log(male);
+        var options = {
+            series: [{
+                data: [male, female]
+            }],
+            chart: {
+                height: 350,
+                type: 'bar',
+            },
+            plotOptions: {
+                bar: {
+                    borderRadius: 10,
+                    dataLabels: {
+                        position: 'top', // top, center, bottom
+                    },
+                }
+            },
+            dataLabels: {
+                enabled: true,
+                formatter: function (val) {
+                    return val;
+                },
+                offsetY: -20,
+                style: {
+                    fontSize: '12px',
+                    colors: ["#304758"]
+                }
+            },
+            xaxis: {
+                categories: ["Male", "Female"],
+                position: 'top',
+                axisBorder: {
+                    show: false
+                },
+                axisTicks: {
+                    show: false
+                },
+                crosshairs: {
+                    fill: {
+                        type: 'gradient',
+                        gradient: {
+                            colorFrom: '#D8E3F0',
+                            colorTo: '#BED1E6',
+                            stops: [0, 100],
+                            opacityFrom: 0.4,
+                            opacityTo: 0.5,
+                        }
+                    }
+                },
+                tooltip: {
+                    enabled: true,
+                }
+            },
+            yaxis: {
+                axisBorder: {
+                    show: false
+                },
+                axisTicks: {
+                    show: false,
+                },
+                labels: {
+                    show: false,
+                    formatter: function (val) {
+                        return val;
+                    }
+                }
+            }
+        };
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
+    }).fail((error) => {
+        Swal.fire({
+            title: 'Error!',
+            text: 'Data Cannot Deleted',
+            icon: 'Error',
+            confirmButtonText: 'Next'
+        })
+    });
+
+
+
+
+
     (function () {
         'use strict';
         window.addEventListener('load', function () {
@@ -36,6 +127,11 @@ $(document).ready(function () {
                 form.addEventListener('submit', function (event) {
                     if (form.checkValidity() === false) {
                         event.preventDefault();
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Something went wrong!',
+                        })
                         event.stopPropagation();
                     }
                     form.classList.add('was-validated');
@@ -73,8 +169,9 @@ $(document).ready(function () {
         }, false);
     })();
 
-   var table= $('#dataperson').DataTable({
-        "filter": true,
+    var table=$('#dataperson').DataTable({
+       "filter": true,
+        "dom": 'Bfrtip',
         "ajax": {
             "url": "https://localhost:5001/api/Persons/GetPerson",
             "datatype": "json",
@@ -133,11 +230,44 @@ $(document).ready(function () {
                 "data": null,
                 "orderable": false,
                 "render": function (data, type, row) {
-                    return `<button class="btn btn-primary"data-toogle="modal" data-target="#GetPerson" onclick="detail('${row["nik"]}')">Details</button>`
+                    var button = `<button id= "btn-detail" class="btn btn-primary" data-toogle="modal" data-target="#GetPerson" onclick="detail('${row["nik"]}')">Details</button>`;
+                    
+                    button +='          '+`<button class="btn btn-danger" onclick="del('${row["nik"]}')">Delete</button>`;
+                    return button
                 }
+
+                
             }
-        ]
+       ],
+
+       "select": true,
+       "colReorder": true,
+       "buttons": [
+           {
+               extend: 'collection',
+               text: 'Export',
+               buttons: [
+                   'copy',
+                   {
+                       extend: 'excelHtml5',
+                       exportOptions: {
+                           columns: [ 1, 2, 3,4, 5 ]
+                       }
+                   },
+                   'csv',
+                   {
+                       extend: 'pdfHtml5',
+                       exportOptions: {
+                           columns: [ 1, 2, 3,4, 5 ]
+                       }
+                   },
+                   'print'
+               ]
+           }
+       ]
    });
+
+    
 
 
     function insert(data) {
@@ -246,6 +376,42 @@ function detail(nik) {
     }).fail((result) => {
         console.log(result);
     });
+}
+
+function del(nik) {
+    console.log(nik)
+    Swal.fire({
+        title: `Are you sure to delete data nik = ${nik}?`,
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: "https://localhost:5001/api/Persons/" + nik,
+                method: 'DELETE'
+            }).done((result) => {
+                console.log(result)
+
+            Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+                )
+                setInterval(function () {
+                    table.ajax.reload(null, false); // user paging is not reset on reload
+                }, 0);
+            }).fail((result) => {
+                console.log(result);
+            });
+        }
+    })
+
+
+   
 }
 
 //function detail(url) {

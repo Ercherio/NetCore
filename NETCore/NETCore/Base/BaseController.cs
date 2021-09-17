@@ -108,7 +108,7 @@ namespace NETCore.Base
             {
                 return BadRequest(new { status = HttpStatusCode.BadRequest, message = "Data Gagal dihapus" });
             }
-            repository.Delete(key);
+            //repository.Delete(key);
             return Ok(new { status = HttpStatusCode.OK, message = "Data Berhasil dihapus" });
         }
 
