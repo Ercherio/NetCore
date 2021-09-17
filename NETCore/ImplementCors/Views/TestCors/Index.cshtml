@@ -1,25 +1,267 @@
-﻿
-@{
-    Layout = null;
+﻿@{
+    Layout = "_LayoutAdmin";
 }
 
-<!DOCTYPE html>
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#Register">Register</button>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-</body>
-</html>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script>
-  
-   $.ajax({  
-       url: "https://localhost:5001/api/Persons/GetPerson",
-       success: function (result) {  
-           console.log(result);  
-    }  
-    })  
-</script>
+<table class="table" id="dataperson">
+
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">No.</th>
+            <th scope="col">NIK</th>
+            <th scope="col">Name</th>
+            @*<th scope="col">Gender</th>*@
+            <th scope="col">Email</th>
+            <th scope="col">Phone Number</th>
+            <th scope="col">Salary</th>
+            <th scope="col">Action</th>
+
+        </tr>
+    </thead>
+
+    <tbody id="person">
+    </tbody>
+</table>
+
+<div class="modal fade" id="GetPerson" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header" id="header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Person Detail</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-4">
+                        <ul>
+                            <li class="list-group">NIK</li>
+                            <li class="list-group">Full Name</li>
+                            <li class="list-group">Gender</li>
+                            <li class="list-group">Birth Date</li>
+                            <li class="list-group">Email</li>
+                            <li class="list-group">Phone</li>
+                            <li class="list-group">GPA</li>
+                            <li class="list-group">Salary</li>
+                        </ul>
+                    </div>
+                    <div class="col-8" id="detailperson">
+
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade bd-example-modal-lg" id="Register" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Form Register</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+
+                <form class="needs-validation" novalidate>
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+                            <label for="validationCustomNIK">NIK</label>
+                            <div class="input-group">
+
+                                <input type="text" class="form-control" id="nik" placeholder="0123xxxx" autocomplete="off" required>
+                                <div class="invalid-feedback">
+                                    Check Again!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">First name</label>
+                            <input type="text" class="form-control" id="firstName" placeholder="Mark" autocomplete="off" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom02">Last name</label>
+                            <input type="text" class="form-control" id="lastName" placeholder="Otto" autocomplete="off" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+                            <label for="validationCustomPhone">Phone Number</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="phone" placeholder="0812-3456-7890" required>
+                                <div class="valid-feedback">
+                                    Looks Good.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+                            <label for="validationCustomBirthDate">Birth Date</label>
+                            <div class="input-group">
+
+                                <input type="date" class="form-control" id="birthDate" placeholder="yyyy-mm-dd" required>
+                                <div class="valid-feedback">
+                                    Looks Good.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+                            <label for="validationCustomUserEmail">Email</label>
+                            <div class="input-group">
+
+                                <input type="email" class="form-control" id="email" placeholder="abcdefg@domain" required>
+                                <div class="valid-feedback">
+                                    Looks Good.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+                            <label for="validationCustomSalary">Salary</label>
+                            <div class="input-group">
+
+                                <input type="text" class="form-control" id="salary" placeholder=">10000000" required>
+                                <div class="valid-feedback">
+                                    Looks Good.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+
+                            <label for="gender">Gender</label>
+                            <select id="gender" class="custom-select" required>
+                                <option selected="">-Choose-</option>
+                                <option value="0">Male</option>
+                                <option value="1">Female</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Check again!
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+                            <label for="validationCustomPassword">Password</label>
+                            <div class="input-group">
+
+                                <input type="password" class="form-control" id="password" placeholder="Type Your Password" required>
+                                <div class="valid-feedback">
+                                    Looks Good.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <label for="validationCustomDegree">Degree</label>
+                            <div class="input-group">
+
+                                <input type="text" class="form-control" id="degree" placeholder="S.Kom" required>
+                                <div class="valid-feedback">
+                                    Looks Good.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <label for="validationCustomGPA">GPA</label>
+                            <div class="input-group">
+
+                                <input type="text" class="form-control" id="gPA" placeholder="3,56" required>
+                                <div class="valid-feedback">
+                                    Looks Good.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <label for="validationCustomUniversity">University ID</label>
+                            <div class="input-group">
+
+                                <input type="text" class="form-control" id="university" placeholder=">1" required>
+                                <div class="valid-feedback">
+                                    Looks Good.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <label for="validationCustomRoleID">Role ID</label>
+                            <div class="input-group">
+
+                                <input type="text" class="form-control" id="roleID" placeholder=">1" required>
+                                <div class="valid-feedback">
+                                    Looks Good.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                            <label class="form-check-label" for="invalidCheck">
+                                Agree to terms and conditions
+                            </label>
+                            <div class="invalid-feedback">
+                                You must agree before submitting.
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" type="submit" id="btnSubmit">Submit form</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+@section Scripts {
+    <script src="~/js/personJs.js"></script>
+}

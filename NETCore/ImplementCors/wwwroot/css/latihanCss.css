@@ -1,0 +1,147 @@
+﻿/*
+body{
+    max-width: 600px;
+    margin: 30px auto;
+    font-family: sans-serif;
+}
+
+div {
+    border: 2px solid;
+    border-color: dimgrey;
+    margin: 20px;
+}
+h1 {
+    background-color: aqua;
+    max-width: 500px;
+    margin: 0 auto;
+    position: static;
+    padding: 2px 50px;
+}
+
+#judul::first-letter{
+    color:blue;
+}
+
+.container {
+    background-color: salmon;
+    width: 300px;
+    height: 400px;
+    margin: 0 auto;
+}
+
+section#a {
+    position: relative;
+    z-index:0;
+}
+
+#a>.p1::first-letter {
+    color: blue;
+    font-size:x-large;
+    font-variant:small-caps;
+}
+
+p.p1{
+    color: black;
+    padding:2px;
+    border: 2px solid blue;
+    margin:10px auto;
+    background-color:aliceblue;
+    
+}
+
+a {
+    margin: 10px auto;
+}
+ unvisited link 
+a:link {
+    color: black;
+}
+ visited link 
+a:visited {
+  color: green;
+}
+
+ mouse over link 
+a:hover {
+  color: whitesmoke;
+}
+
+ selected link 
+a:active {
+    color: blue;
+}
+
+
+p.p2::first-letter{
+    color: green;
+    font-size: x-large;
+}
+
+p.p2 {
+    background-color: #d6f7d2;
+    font-variant: small-caps;
+    border: 2px solid green;
+
+}
+
+p.p3::first-letter {
+        color: yellow;
+        font-size: x-large;
+    }
+
+p.p3 {
+    background-color:#faeebe;
+    font-variant: small-caps;
+    border: 2px solid yellow;
+
+}
+
+
+#b{
+    margin: 25px 0px;
+}
+
+
+#b > p#a::first-letter {
+    color:aqua;
+    font-size: x-large;
+    font-variant: small-caps;
+}
+
+#b > p#a{
+    background-color:#b6f5ef;
+    border: 2px solid aqua;
+    margin-bottom: 0px;
+}
+
+#b > ul{
+    color: blue;
+    background-color:transparent;
+    opacity:1;
+    font-size: 14px;
+    margin:3px auto;
+}
+
+ul li:nth-child(2){
+    background-color:#f9860f;
+}
+
+
+::marker {
+    color: black;
+}
+
+
+
+
+
+*/
+h1 {
+    text-transform: uppercase;
+    font-size: large;
+    
+}
+
+.modal-header#header{
+    background-color: aquamarine;
+}
