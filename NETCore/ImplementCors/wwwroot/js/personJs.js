@@ -34,6 +34,87 @@ $(document).ready(function () {
         var female = result.result.filter(data => data.gender === "Female").length;
         var male = result.result.filter(data => data.gender === "Male").length;
         console.log(male);
+        console.log(result.result[0].gender);
+        
+        var itdel = result.result.filter(data =>data.universityId === 1).length;
+        var ui = result.result.filter(data => data.universityId === 2).length;
+        var itb = result.result.filter(data => data.universityId === 3).length;
+        var undip = result.result.filter(data => data.universityId === 4).length;
+        console.log(itdel);
+
+        /*ini untuk university*/
+
+        var universities = {
+            series: [{
+                data: [itdel, ui,itb, undip]
+            }],
+            chart: {
+                height: 350,
+                type: 'bar',
+            },
+            plotOptions: {
+                bar: {
+                    borderRadius: 10,
+                    dataLabels: {
+                        position: 'top', // top, center, bottom
+                    },
+                }
+            },
+            dataLabels: {
+                enabled: true,
+                formatter: function (val) {
+                    return val;
+                },
+                offsetY: -20,
+                style: {
+                    fontSize: '12px',
+                    colors: ["#304758"]
+                }
+            },
+            xaxis: {
+                categories: ["ITDEL", "UI","ITB", "UNDIP"],
+                position: 'top',
+                axisBorder: {
+                    show: false
+                },
+                axisTicks: {
+                    show: false
+                },
+                crosshairs: {
+                    fill: {
+                        type: 'gradient',
+                        gradient: {
+                            colorFrom: '#D8E3F0',
+                            colorTo: '#BED1E6',
+                            stops: [0, 100],
+                            opacityFrom: 0.4,
+                            opacityTo: 0.5,
+                        }
+                    }
+                },
+                tooltip: {
+                    enabled: true,
+                }
+            },
+            yaxis: {
+                axisBorder: {
+                    show: false
+                },
+                axisTicks: {
+                    show: false,
+                },
+                labels: {
+                    show: false,
+                    formatter: function (val) {
+                        return val;
+                    }
+                }
+            }
+        };
+        var chartuniv = new ApexCharts(document.querySelector("#chartuniv"), universities);
+        chartuniv.render();
+
+        /*ini untuk char gender*/
         var options = {
             series: [{
                 data: [male, female]
