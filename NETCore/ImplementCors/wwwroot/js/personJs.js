@@ -31,7 +31,7 @@ $(document).ready(function () {
         type: "GET"
     }).done((result) => {
         console.log(result);
-        var female = result.result.filter(data => data.gender === "Female").length;
+        var female = result.result.filter(data => data.gender === "Famale").length;
         var male = result.result.filter(data => data.gender === "Male").length;
         console.log(male);
         console.log(result.result[0].gender);
@@ -42,6 +42,24 @@ $(document).ready(function () {
         var undip = result.result.filter(data => data.universityId === 4).length;
         console.log(itdel);
 
+        var salary;
+        var name;
+        
+        
+        $.each(result.result, function (key, val) {
+            if (key == 0) {
+                salary = val.salary;
+                name = val.firstName;
+            }
+            else {
+                salary += val.salary;
+                name+= val.firstName;
+            }
+            
+        })
+
+        console.log(salary);
+        console.log(name);
         /*ini untuk university*/
 
         var universities = {
@@ -56,7 +74,7 @@ $(document).ready(function () {
                 bar: {
                     borderRadius: 10,
                     dataLabels: {
-                        position: 'top', // top, center, bottom
+                        position: 'center', // top, center, bottom
                     },
                 }
             },
@@ -114,10 +132,12 @@ $(document).ready(function () {
         var chartuniv = new ApexCharts(document.querySelector("#chartuniv"), universities);
         chartuniv.render();
 
-        /*ini untuk char gender*/
-        var options = {
+        //ini untuk char salary
+      
+        var salaries = {
             series: [{
-                data: [male, female]
+                name: 'Salary',
+                data: [result.result[0].salary , result.result[1].salary]
             }],
             chart: {
                 height: 350,
@@ -126,61 +146,68 @@ $(document).ready(function () {
             plotOptions: {
                 bar: {
                     borderRadius: 10,
-                    dataLabels: {
-                        position: 'top', // top, center, bottom
-                    },
+                    columnWidth: '50%',
                 }
+            }, dataLabels: {
+                enabled: false
             },
-            dataLabels: {
-                enabled: true,
-                formatter: function (val) {
-                    return val;
-                },
-                offsetY: -20,
-                style: {
-                    fontSize: '12px',
-                    colors: ["#304758"]
-                }
+            stroke: {
+                width: 2
             },
-            xaxis: {
-                categories: ["Male", "Female"],
-                position: 'top',
-                axisBorder: {
-                    show: false
-                },
-                axisTicks: {
-                    show: false
-                },
-                crosshairs: {
-                    fill: {
-                        type: 'gradient',
-                        gradient: {
-                            colorFrom: '#D8E3F0',
-                            colorTo: '#BED1E6',
-                            stops: [0, 100],
-                            opacityFrom: 0.4,
-                            opacityTo: 0.5,
-                        }
-                    }
-                },
-                tooltip: {
-                    enabled: true,
+
+            grid: {
+                row: {
+                    colors: ['#fff', '#f2f2f2']
                 }
+            }, xaxis: {
+                labels: {
+                    rotate: -45
+                },
+                categories: [result.result[0].firstName, result.result[1].firstName],
+                tickPlacement: 'on'
             },
             yaxis: {
-                axisBorder: {
-                    show: false
+                title: {
+                    text: 'Salary (Rp)',
                 },
-                axisTicks: {
-                    show: false,
+            },
+            fill: {
+                type: 'gradient', gradient: {
+                    shade: 'light',
+                    type: "horizontal",
+                    shadeIntensity: 0.25,
+                    gradientToColors: undefined,
+                    inverseColors: true,
+                    opacityFrom: 0.85,
+                    opacityTo: 0.85,
+                    stops: [50, 0, 100]
                 },
-                labels: {
-                    show: false,
-                    formatter: function (val) {
-                        return val;
+            }
+        };
+
+        var chartsa = new ApexCharts(document.querySelector("#chartsalary"), salaries);
+        chartsa.render();
+        /*ini untuk char gender*/
+        
+        var options = {
+            series: [male,female],
+            chart: {
+                width: 280,
+                type: 'pie',
+            },
+            labels: ['Male', 'Female'],
+            responsive: [{
+                breakpoint: 480,
+                options: {
+                    chart: {
+                        width:200
+                    },
+                    legend: {
+                        show: true,
+                        position: 'right',
                     }
                 }
-            }
+            }]
         };
         var chart = new ApexCharts(document.querySelector("#chart"), options);
         chart.render();
