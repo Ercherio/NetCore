@@ -43,23 +43,25 @@ namespace NETCore.Controllers
             var getPerson = repository.GetPersonVMs();
             if (getPerson.Count() >0)
             {
-                var get = Ok(new
-                {
-                    status = HttpStatusCode.OK,
-                    result = getPerson,
-                    message = "Success to Display Data"
-                });
-                return get;
+                //var get = Ok(new
+                //{
+                //    status = HttpStatusCode.OK,
+                //    result = getPerson,
+                //    message = "Success to Display Data"
+                //});
+                //return get;
+                return Ok(getPerson);
             }
             else
             {
-                var get = NotFound(new
-                {
-                    status = HttpStatusCode.NotFound,
-                    result = getPerson,
-                    message = "Data Empty"
-                });
-                return get;
+                //var get = NotFound(new
+                //{
+                //    status = HttpStatusCode.NotFound,
+                //    result = getPerson,
+                //    message = "Data Empty"
+                //});
+                //return get;
+                return NotFound(getPerson);
             }
         }
         [EnableCors("AllowAllOrigins")]
@@ -70,23 +72,25 @@ namespace NETCore.Controllers
             var getPerson = repository.GetPersonVMs(NIK);
             if (getPerson != null)
             {
-                var get = Ok(new
-                {
-                    status = HttpStatusCode.OK,
-                    result = getPerson,
-                    message = "Success to Display Data"
-                });
-                return get;
+                //var get = Ok(new
+                //{
+                //    status = HttpStatusCode.OK,
+                //    result = getPerson,
+                //    message = "Success to Display Data"
+                //});
+                //return get;
+                return Ok(getPerson);
             }
             else 
             {
-                var get = NotFound(new
-                {
-                    status = HttpStatusCode.NotFound,
-                    result =getPerson,
-                    message = "Data Empty"
-                });
-                return get;
+                //var get = NotFound(new
+                //{
+                //    status = HttpStatusCode.NotFound,
+                //    result =getPerson,
+                //    message = "Data Empty"
+                //});
+                //return get;
+                return NotFound(getPerson);
             }
         }
         [EnableCors("AllowAllOrigins")]

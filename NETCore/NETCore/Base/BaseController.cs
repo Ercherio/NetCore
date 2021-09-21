@@ -69,7 +69,9 @@ namespace NETCore.Base
 
                 return NotFound(new { status = HttpStatusCode.NotFound, message = "Data Kosong" });
             }
-            return Ok(new { status = HttpStatusCode.OK, data, message = "Data Berhasil ditampilkan" });
+
+            //return Ok(new { status = HttpStatusCode.OK, data, message = "Data Berhasil ditampilkan" });
+            return Ok(data);
         }
         [HttpGet("{key}")]
         public ActionResult Get(Key key)
@@ -80,7 +82,8 @@ namespace NETCore.Base
             {
                 return NotFound(new { status = HttpStatusCode.NotFound, message = "Kamu salah input data gaada" });
             }
-            return Ok(new { status = HttpStatusCode.OK, data, message = "Data ditemukan" });
+            //return Ok(new { status = HttpStatusCode.OK, data, message = "Data ditemukan" });
+            return Ok(data);
         }
         [HttpPut]
         public ActionResult Update(Entity entity)

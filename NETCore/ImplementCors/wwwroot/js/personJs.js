@@ -26,199 +26,194 @@
 
 $(document).ready(function () {
 
-    $.ajax({
-        url: 'https://localhost:5001/api/Persons/GetPerson',
-        type: "GET"
-    }).done((result) => {
-        console.log(result);
-        var female = result.result.filter(data => data.gender === "Famale").length;
-        var male = result.result.filter(data => data.gender === "Male").length;
-        console.log(male);
-        console.log(result.result[0].gender);
+    //$.ajax({
+    //    url: '/Persons/GetPerson',
+    //    /*url: '/Persons/GetPerson',*/
+    //    type: "GET"
+    //}).done((result) => {
+    //    console.log(result);
+    //    var female = result.filter(data => data.gender === 0).length;
+    //    var male = result.filter(data => data.gender === 1).length;
+    //    console.log(male);
+    //    console.log(result[0].gender);
         
-        var itdel = result.result.filter(data =>data.universityId === 1).length;
-        var ui = result.result.filter(data => data.universityId === 2).length;
-        var itb = result.result.filter(data => data.universityId === 3).length;
-        var undip = result.result.filter(data => data.universityId === 4).length;
-        console.log(itdel);
+    //    var itdel = result.filter(data =>data.universityId === 1).length;
+    //    var ui = result.filter(data => data.universityId === 2).length;
+    //    var itb = result.filter(data => data.universityId === 3).length;
+    //    var undip = result.filter(data => data.universityId === 4).length;
+    //    console.log(itdel);
 
-        var salary;
-        var name;
         
         
-        $.each(result.result, function (key, val) {
-            if (key == 0) {
-                salary = val.salary;
-                name = val.firstName;
-            }
-            else {
-                salary += val.salary;
-                name+= val.firstName;
-            }
-            
-        })
+    //    var sal = []
+    //    var fName = []
+    //    for (r of result) {
+    //        /*console.log(r.salary)*/
+    //        sal.push(r.salary)
+    //        fName.push(r.firstName)
+    //    }
 
-        console.log(salary);
-        console.log(name);
-        /*ini untuk university*/
+    //    console.log(sal);
+    //    console.log(fName);
+    //    /*ini untuk university*/
 
-        var universities = {
-            series: [{
-                data: [itdel, ui,itb, undip]
-            }],
-            chart: {
-                height: 350,
-                type: 'bar',
-            },
-            plotOptions: {
-                bar: {
-                    borderRadius: 10,
-                    dataLabels: {
-                        position: 'center', // top, center, bottom
-                    },
-                }
-            },
-            dataLabels: {
-                enabled: true,
-                formatter: function (val) {
-                    return val;
-                },
-                offsetY: -20,
-                style: {
-                    fontSize: '12px',
-                    colors: ["#304758"]
-                }
-            },
-            xaxis: {
-                categories: ["ITDEL", "UI","ITB", "UNDIP"],
-                position: 'top',
-                axisBorder: {
-                    show: false
-                },
-                axisTicks: {
-                    show: false
-                },
-                crosshairs: {
-                    fill: {
-                        type: 'gradient',
-                        gradient: {
-                            colorFrom: '#D8E3F0',
-                            colorTo: '#BED1E6',
-                            stops: [0, 100],
-                            opacityFrom: 0.4,
-                            opacityTo: 0.5,
-                        }
-                    }
-                },
-                tooltip: {
-                    enabled: true,
-                }
-            },
-            yaxis: {
-                axisBorder: {
-                    show: false
-                },
-                axisTicks: {
-                    show: false,
-                },
-                labels: {
-                    show: false,
-                    formatter: function (val) {
-                        return val;
-                    }
-                }
-            }
-        };
-        var chartuniv = new ApexCharts(document.querySelector("#chartuniv"), universities);
-        chartuniv.render();
+    //    var universities = {
+    //        series: [{
+    //            data: [itdel, ui,itb, undip]
+    //        }],
+    //        chart: {
+    //            height: 350,
+    //            type: 'bar',
+    //        },
+    //        plotOptions: {
+    //            bar: {
+    //                borderRadius: 10,
+    //                dataLabels: {
+    //                    position: 'center', // top, center, bottom
+    //                },
+    //            }
+    //        },
+    //        dataLabels: {
+    //            enabled: true,
+    //            formatter: function (val) {
+    //                return val;
+    //            },
+    //            offsetY: -20,
+    //            style: {
+    //                fontSize: '12px',
+    //                colors: ["#304758"]
+    //            }
+    //        },
+    //        xaxis: {
+    //            categories: ["ITDEL", "UI","ITB", "UNDIP"],
+    //            position: 'top',
+    //            axisBorder: {
+    //                show: false
+    //            },
+    //            axisTicks: {
+    //                show: false
+    //            },
+    //            crosshairs: {
+    //                fill: {
+    //                    type: 'gradient',
+    //                    gradient: {
+    //                        colorFrom: '#D8E3F0',
+    //                        colorTo: '#BED1E6',
+    //                        stops: [0, 100],
+    //                        opacityFrom: 0.4,
+    //                        opacityTo: 0.5,
+    //                    }
+    //                }
+    //            },
+    //            tooltip: {
+    //                enabled: true,
+    //            }
+    //        },
+    //        yaxis: {
+    //            axisBorder: {
+    //                show: false
+    //            },
+    //            axisTicks: {
+    //                show: false,
+    //            },
+    //            labels: {
+    //                show: false,
+    //                formatter: function (val) {
+    //                    return val;
+    //                }
+    //            }
+    //        }
+    //    };
+    //    var chartuniv = new ApexCharts(document.querySelector("#chartuniv"), universities);
+    //    chartuniv.render();
 
-        //ini untuk char salary
+    //    //ini untuk char salary
       
-        var salaries = {
-            series: [{
-                name: 'Salary',
-                data: [result.result[0].salary , result.result[1].salary]
-            }],
-            chart: {
-                height: 350,
-                type: 'bar',
-            },
-            plotOptions: {
-                bar: {
-                    borderRadius: 10,
-                    columnWidth: '50%',
-                }
-            }, dataLabels: {
-                enabled: false
-            },
-            stroke: {
-                width: 2
-            },
+    //    var salaries = {
+    //        series: [{
+    //            name: 'Salary',
+    //            data: sal
+    //        }],
+    //        chart: {
+    //            height: 350,
+    //            type: 'bar',
+    //        },
+    //        plotOptions: {
+    //            bar: {
+    //                borderRadius: 10,
+    //                columnWidth: '50%',
+    //            }
+    //        }, dataLabels: {
+    //            enabled: false
+    //        },
+    //        stroke: {
+    //            width: 2
+    //        },
 
-            grid: {
-                row: {
-                    colors: ['#fff', '#f2f2f2']
-                }
-            }, xaxis: {
-                labels: {
-                    rotate: -45
-                },
-                categories: [result.result[0].firstName, result.result[1].firstName],
-                tickPlacement: 'on'
-            },
-            yaxis: {
-                title: {
-                    text: 'Salary (Rp)',
-                },
-            },
-            fill: {
-                type: 'gradient', gradient: {
-                    shade: 'light',
-                    type: "horizontal",
-                    shadeIntensity: 0.25,
-                    gradientToColors: undefined,
-                    inverseColors: true,
-                    opacityFrom: 0.85,
-                    opacityTo: 0.85,
-                    stops: [50, 0, 100]
-                },
-            }
-        };
+    //        grid: {
+    //            row: {
+    //                colors: ['#fff', '#f2f2f2']
+    //            }
+    //        }, xaxis: {
+    //            labels: {
+    //                rotate: -45
+    //            },
+    //            categories: fName,
+    //            tickPlacement: 'on'
+    //        },
+    //        yaxis: {
+    //            title: {
+    //                text: 'Salary (Rp)',
+    //            },
+    //        },
+    //        fill: {
+    //            type: 'gradient', gradient: {
+    //                shade: 'light',
+    //                type: "horizontal",
+    //                shadeIntensity: 0.25,
+    //                gradientToColors: undefined,
+    //                inverseColors: true,
+    //                opacityFrom: 0.85,
+    //                opacityTo: 0.85,
+    //                stops: [50, 0, 100]
+    //            },
+    //        }
+    //    };
 
-        var chartsa = new ApexCharts(document.querySelector("#chartsalary"), salaries);
-        chartsa.render();
-        /*ini untuk char gender*/
+    //    var chartsa = new ApexCharts(document.querySelector("#chartsalary"), salaries);
+    //    chartsa.render();
+    //    /*ini untuk char gender*/
         
-        var options = {
-            series: [male,female],
-            chart: {
-                width: 280,
-                type: 'pie',
-            },
-            labels: ['Male', 'Female'],
-            responsive: [{
-                breakpoint: 480,
-                options: {
-                    chart: {
-                        width:200
-                    },
-                    legend: {
-                        show: true,
-                        position: 'right',
-                    }
-                }
-            }]
-        };
-        var chart = new ApexCharts(document.querySelector("#chart"), options);
-        chart.render();
-    }).fail((error) => {
-        Swal.fire({
-            title: 'Error!',
-            text: 'Data Cannot Deleted',
-            icon: 'Error',
-            confirmButtonText: 'Next'
-        })
-    });
+    //    var options = {
+    //        series: [male,female],
+    //        chart: {
+    //            width: 280,
+    //            type: 'pie',
+    //        },
+    //        labels: ['Male', 'Female'],
+    //        responsive: [{
+    //            breakpoint: 480,
+    //            options: {
+    //                chart: {
+    //                    width:200
+    //                },
+    //                legend: {
+    //                    show: true,
+    //                    position: 'right',
+    //                }
+    //            }
+    //        }]
+    //    };
+    //    var chart = new ApexCharts(document.querySelector("#chart"), options);
+    //    chart.render();
+    //}).fail((error) => {
+    //    Swal.fire({
+    //        title: 'Error!',
+    //        text: 'Data Cannot Deleted',
+    //        icon: 'Error',
+    //        confirmButtonText: 'Next'
+    //    })
+    //});
 
 
 
@@ -281,9 +276,10 @@ $(document).ready(function () {
        "filter": true,
         "dom": 'Bfrtip',
         "ajax": {
-            "url": "https://localhost:5001/api/Persons/GetPerson",
+            /*"url": "https://localhost:5001/api/Persons/GetPerson",*/
+            "url": "/Persons/GetPerson",
             "datatype": "json",
-            "dataSrc": "result"
+            "dataSrc": ""
         },
         
         "columns": [
@@ -442,15 +438,16 @@ $(document).ready(function () {
 
 function detail(nik) {
     $.ajax({
-        url: "https://localhost:5001/api/Persons/GetPerson/"+nik
+        /*url: "https://localhost:5001/api/Persons/GetPerson/"+nik*/
+        url: "/Persons/GetByPersonNIK/"+nik
     }).done((result) => {
         console.log(result);
         var text = "";
         var sPhone;
-        var salary = "Rp " + result.result.salary.toString();
-        var birthDate = result.result.birthDate.toString().substring(0, 10);
+        var salary = "Rp " + result.salary.toString();
+        var birthDate = result.birthDate.toString().substring(0, 10);
 
-        sPhone = result.result.phone.toString();
+        sPhone = result.phone.toString();
         var subsTphone = sPhone.substring(0, 2);
         /*console.log(data.nik);*/
         if (subsTphone == "08") {
@@ -461,17 +458,17 @@ function detail(nik) {
             
         }
         console.log(birthDate);
-        title = `<h5>Detail of ${result.result.fullName}</h5>`;
+        title = `<h5>Detail of ${result.fullName}</h5>`;
 
         text = `                  
                 <ul>
-                            <li class="list-group">: ${result.result.nik}</li>
-                            <li class="list-group">: ${result.result.fullName}, ${result.result.degree}</li>
-                            <li class="list-group">: ${result.result.gender}</li>
+                            <li class="list-group">: ${result.nik}</li>
+                            <li class="list-group">: ${result.fullName}, ${result.degree}</li>
+                            <li class="list-group">: ${result.gender}</li>
                             <li class="list-group">: ${birthDate}</li>
-                            <li class="list-group">: ${result.result.email}</li>
+                            <li class="list-group">: ${result.email}</li>
                             <li class="list-group">: ${sPhone}</li>
-                            <li class="list-group">: ${result.result.gpa}</li>
+                            <li class="list-group">: ${result.gpa}</li>
                             <li class="list-group">: ${salary}</li>
                 </ul>
              `;

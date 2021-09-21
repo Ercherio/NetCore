@@ -1,3 +1,5 @@
+using ImplementCors.Base.Url;
+using ImplementCors.Repository.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -16,6 +18,7 @@ namespace ImplementCors
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
         }
 
         public IConfiguration Configuration { get; }
@@ -24,6 +27,9 @@ namespace ImplementCors
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddScoped<PersonRepository>();
+            services.AddScoped<Address>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
