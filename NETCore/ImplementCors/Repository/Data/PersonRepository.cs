@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace ImplementCors.Repository.Data
@@ -52,6 +54,23 @@ namespace ImplementCors.Repository.Data
             }
             return personVM;
         }
+
+
+        public async Task<PersonVM> Register(PersonVM personVM)
+        {
+            StringContent content = new StringContent(JsonConvert.SerializeObject(personVM), Encoding.UTF8, "application/json");
+
+            using (var response = await httpClient.PostAsync(request + "Register", content))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+                personVM = JsonConvert.DeserializeObject<PersonVM>(apiResponse);
+            }
+            return personVM;
+        }
+
+
+
+
 
 
         //public async Task<List<District>> GetByProvinceId(int provinceId)

@@ -377,7 +377,8 @@ $(document).ready(function () {
     function insert(data) {
         console.log(data);
         $.ajax({
-            url: 'https://localhost:5001/api/Persons/Register',
+            /*url: 'https://localhost:5001/api/Persons/Register',*/
+            url: '"/Persons/Register"',
             method: 'POST',
             dataType: 'json',
             contentType: 'application/json',

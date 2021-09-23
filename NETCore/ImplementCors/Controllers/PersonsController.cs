@@ -1,7 +1,9 @@
 ﻿using ImplementCors.Base.Controllers;
 using ImplementCors.Repository.Data;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NETCore.Model;
+using NETCore.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +35,25 @@ namespace ImplementCors.Controllers
             var result = await repository.GetPersonVM(NIK);
             return Json(result);
         }
+
+        [HttpPost("Register")]
+        public async Task<JsonResult> Register(PersonVM person)
+        {
+            
+            var result = await repository.Register(person);
+            return Json(result);
+            //var token = jwtToken.Token;
+
+            //if (token == null)
+            //{
+            //    return RedirectToAction("index");
+            //}
+
+            //HttpContext.Session.SetString("JWToken", token);
+
+            //return RedirectToAction("index", "home");
+        }
+
 
         public IActionResult Index()
         {

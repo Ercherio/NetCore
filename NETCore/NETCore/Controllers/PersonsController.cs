@@ -227,7 +227,7 @@ namespace NETCore.Controllers
 
             identity.AddClaim(new Claim(JwtRegisteredClaimNames.Sub, configuration["Jwt:Subject"]));
             identity.AddClaim(new Claim("email", loginVM.Email));
-            foreach (var item in data)
+            foreach (var item in data)  
             {
                 identity.AddClaim(new Claim("role", item.RoleName));
             }

@@ -6,11 +6,16 @@ using System.Threading.Tasks;
 
 namespace ImplementCors.Controllers
 {
+    
     public class TestCors : Controller
     {
         public IActionResult Index()
         {
-            return View();
+            if (User.Identity.IsAuthenticated)
+            {
+                return View();
+            }
+            return RedirectToAction("index", "Login", "login");
         }
 
     }

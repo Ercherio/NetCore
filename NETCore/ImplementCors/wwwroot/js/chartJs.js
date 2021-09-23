@@ -163,6 +163,7 @@ $(document).ready(function () {
             series: [male, female],
             chart: {
                 width: 280,
+                height: 350,
                 type: 'pie',
             },
             labels: ['Male', 'Female'],
