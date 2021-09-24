@@ -20,7 +20,7 @@ namespace NETCore.ViewModel
         public string FirstName { get; set; }
         [Required]
         public string LastName { get; set; }
-        public string FullName { get; set; }
+        public string FullName { get; internal set; }
         [Required]
         [Phone]
         public string Phone { get; set; }
@@ -43,7 +43,7 @@ namespace NETCore.ViewModel
 
         [Required]
         [StringLength(100,MinimumLength =8)]
-        public string Password { internal get; set; }
+        public string Password { get; set; }
 
         [Required]
         public string Degree { get; set; }
@@ -54,7 +54,7 @@ namespace NETCore.ViewModel
         [Required]
         public int UniversityId { get; set; }
 
-        public int RoleId {internal get;  set; }
+        public int RoleId {get;  set; }
 
         public ICollection<AccountRole> AccountRoles { get; internal set; }
 

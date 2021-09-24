@@ -7,8 +7,8 @@ $(document).ready(function () {
         type: "GET"
     }).done((result) => {
         console.log(result);
-        var female = result.filter(data => data.gender === 0).length;
-        var male = result.filter(data => data.gender === 1).length;
+        var female = result.filter(data => data.gender === 1).length;
+        var male = result.filter(data => data.gender === 0).length;
         console.log(male);
         console.log(result[0].gender);
 

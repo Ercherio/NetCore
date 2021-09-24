@@ -261,10 +261,10 @@ $(document).ready(function () {
 
                         };
 
-                        console.log(JSON.stringify(obj));
-                        var data = JSON.stringify(obj);
+                        //console.log(JSON.stringify(obj));
+                        //var data = JSON.stringify(obj);
                         // post data to database
-                        insert(data);
+                        insert(obj);
                     }
                     form.classList.add('was-validated');
                 }, false);
@@ -375,13 +375,14 @@ $(document).ready(function () {
 
 
     function insert(data) {
+
         console.log(data);
         $.ajax({
-            /*url: 'https://localhost:5001/api/Persons/Register',*/
-            url: '"/Persons/Register"',
+
+            url: "/Persons/Register",
             method: 'POST',
             dataType: 'json',
-            contentType: 'application/json',
+            contentType: 'application/x-www-form-urlencoded',
             data: data
         }).done((result) => {
             //buat alert pemberitahuan jika 
@@ -392,7 +393,7 @@ $(document).ready(function () {
                 'success'
             )
 
-              //idmodal di hide
+            //idmodal di hide
             $('#Register').modal('hide');
 
             //reload only datatable
@@ -401,14 +402,45 @@ $(document).ready(function () {
             }, 0);
         }).fail((error) => {
             //alert pemberitahuan jika gagal
-           /* alert('ERROR')*/
+            /* alert('ERROR')*/
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
                 text: 'Something went wrong!',
             })
-          
+
         });
+
+        //$.ajax({
+        //    url: "/Persons/Register",
+        //    method: 'POST',
+        //    dataType: 'json',
+        //    contentType: 'application/json',
+        //    data: JSON.stringify(data),
+        //    success: function (data) {
+        //       // console.log(data.message);
+        //        Swal.fire('Registration Success');
+        //        $('#Register').modal('hide');
+
+        ////    //reload only datatable
+        //        setInterval(function () {
+        //            table.ajax.reload(null, false); // user paging is not reset on reload
+        //        }, 0);
+
+        //    },
+        //    error: function (xhr, status, error) {
+        //        Swal.fire({
+        //            icon: 'error',
+        //            icon: 'error',
+        //            title: 'Oops...',
+        //            text: 'Something went wrong!'
+        //        });
+        //    }
+        //})
+
+
+
+        
     }
     //$('#person').on('click', 'button', function () {
     //    var data = table.row($(this).parents('tr')).data();
@@ -447,7 +479,12 @@ function detail(nik) {
         var sPhone;
         var salary = "Rp " + result.salary.toString();
         var birthDate = result.birthDate.toString().substring(0, 10);
-
+        var Gender=null;
+        if (result.gender == 0) {
+            Gender = "Male";
+        } else {
+            Gender = "Female";
+        }
         sPhone = result.phone.toString();
         var subsTphone = sPhone.substring(0, 2);
         /*console.log(data.nik);*/
@@ -459,13 +496,13 @@ function detail(nik) {
             
         }
         console.log(birthDate);
-        title = `<h5>Detail of ${result.fullName}</h5>`;
+        title = `<h5>Detail of ${result.firstName} ${result.lastName} </h5>`;
 
         text = `                  
                 <ul>
                             <li class="list-group">: ${result.nik}</li>
-                            <li class="list-group">: ${result.fullName}, ${result.degree}</li>
-                            <li class="list-group">: ${result.gender}</li>
+                            <li class="list-group">: ${result.firstName} ${result.lastName}, ${result.degree}</li>
+                            <li class="list-group">: ${Gender}</li>
                             <li class="list-group">: ${birthDate}</li>
                             <li class="list-group">: ${result.email}</li>
                             <li class="list-group">: ${sPhone}</li>
@@ -475,7 +512,7 @@ function detail(nik) {
              `;
         /*console.log(text);*/
         $("#GetPerson").modal('show');
-        $("#exampleModalCenterTitle").html(title);
+        $("#GetPersonlabel").html(title);
         $("#detailperson").html(text);
         
 
@@ -507,9 +544,8 @@ function del(nik) {
                 'Your file has been deleted.',
                 'success'
                 )
-                setInterval(function () {
-                    table.ajax.reload(null, false); // user paging is not reset on reload
-                }, 0);
+                table.ajax.reload(); // user paging is not reset on reload
+                
             }).fail((result) => {
                 console.log(result);
             });

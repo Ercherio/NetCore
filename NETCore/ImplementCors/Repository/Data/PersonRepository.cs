@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -56,16 +57,23 @@ namespace ImplementCors.Repository.Data
         }
 
 
-        public async Task<PersonVM> Register(PersonVM personVM)
-        {
-            StringContent content = new StringContent(JsonConvert.SerializeObject(personVM), Encoding.UTF8, "application/json");
+        //public async Task<PersonVM> Register(PersonVM personVM)
+        //{
+        //    StringContent content = new StringContent(JsonConvert.SerializeObject(personVM), Encoding.UTF8, "application/json");
 
-            using (var response = await httpClient.PostAsync(request + "Register", content))
-            {
-                string apiResponse = await response.Content.ReadAsStringAsync();
-                personVM = JsonConvert.DeserializeObject<PersonVM>(apiResponse);
-            }
-            return personVM;
+        //    using (var response = await httpClient.PostAsync(request + "Register", content))
+        //    {
+        //        string apiResponse = await response.Content.ReadAsStringAsync();
+        //        personVM = JsonConvert.DeserializeObject<PersonVM>(apiResponse);
+        //    }
+        //    return personVM;
+        //}
+
+        public string Register(PersonVM register)
+        {
+            StringContent content = new StringContent(JsonConvert.SerializeObject(register), Encoding.UTF8, "application/json");
+            var result = httpClient.PostAsync(request + "Register", content).Result.Content.ReadAsStringAsync().Result;
+            return result;
         }
 
 

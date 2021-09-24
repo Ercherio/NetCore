@@ -37,21 +37,10 @@ namespace ImplementCors.Controllers
         }
 
         [HttpPost("Register")]
-        public async Task<JsonResult> Register(PersonVM person)
+        public JsonResult Register(PersonVM register)
         {
-            
-            var result = await repository.Register(person);
+            var result = repository.Register(register);
             return Json(result);
-            //var token = jwtToken.Token;
-
-            //if (token == null)
-            //{
-            //    return RedirectToAction("index");
-            //}
-
-            //HttpContext.Session.SetString("JWToken", token);
-
-            //return RedirectToAction("index", "home");
         }
 
 
